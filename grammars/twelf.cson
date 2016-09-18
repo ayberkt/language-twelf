@@ -1,0 +1,64 @@
+comment: "preliminary Twelf mode"
+fileTypes: [
+  "elf"
+]
+foldingStartMarker: "\\{\\s*$"
+foldingStopMarker: "^\\s*\\}"
+name: "Twelf"
+patterns: [
+  {
+    match: "\\b(if|while)\\b"
+    name: "keyword.other.twelf"
+  }
+  {
+    match: "(%infix|%prefix|%postfix|%name|%subord|%freeze|%thaw|%abbrev|%clause|%define|%solve|%querytabled|%query|%tabled|%deterministic|%mode|%unique|%block|%worlds|%covers|%total|%terminates|%reduces|%theorem|%prove|%assert|%establish|%sig|%struct|%trustme|%where|%include|%open|%use)"
+    name: "keyword.control.twelf"
+  }
+  {
+    match: "%(\\w+)"
+    name: "invalid.illegal.twelf"
+  }
+  {
+    match: "(<-|->|\\b(type)\\b|\\b(sigma)\\b)"
+    name: "keyword.operator.twelf"
+  }
+  {
+    match: "[:.]"
+    name: "keyword.operator.twelf"
+  }
+  {
+    begin: "[{\\[]"
+    captures:
+      "0":
+        name: "keyword.operator.twelf"
+    end: "[}\\]]"
+    name: "meta.binding.twelf"
+    patterns: [
+      {
+        include: "$self"
+      }
+    ]
+  }
+  {
+    match: "([a-z!&$^+/<=>?@~|#*`;,]|-|\\\\)[a-zA-Z0-9]*"
+    name: "meta.identifier.twelf"
+  }
+  {
+    match: "[A-Z][a-zA-Z0-9]*"
+    name: "variable.other.twelf"
+  }
+  {
+    match: "\\w+(\\.\\w+)+"
+    name: "variable.other.qualified.twelf"
+  }
+  {
+    begin: "%\\{"
+    end: "\\}%"
+    name: "comment.block.twelf"
+  }
+  {
+    match: "(%$|%[% \\t\\f].*$)"
+    name: "comment.line.percentage.twelf"
+  }
+]
+scopeName: "source.twelf"
